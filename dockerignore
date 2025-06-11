@@ -1,0 +1,24 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+
+# Models (these will be downloaded during build)
+models/*
+
+# Results and temporary files
+results/
+tmp_uploads/
+*.log
+
+# Development
+.vscode/
+.idea/

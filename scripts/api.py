@@ -218,7 +218,16 @@ async def generate_avatar(
         # Run inference
         result_video_path = run_inference(avatar_id=avatar_id, audio_path=audio_path)
 
-        return FileResponse(result_video_path, media_type="video/mp4", filename="avatar_result.mp4")
+        # Read the video file and convert to hex
+        try:
+            with open(result_video_path, 'rb') as f:
+                video_bytes = f.read()
+                hex_data = video_bytes.hex()
+                return JSONResponse(content={"video_hex": hex_data})
+        finally:
+            # Clean up audio file
+            if os.path.exists(audio_path):
+                os.remove(audio_path)
 
     except HTTPException:
         raise
